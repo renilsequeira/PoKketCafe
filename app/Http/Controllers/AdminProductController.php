@@ -24,7 +24,6 @@ class AdminProductController extends Controller
             'name' => ['required', 'string', 'min:3'],
             'price' => ['required', 'integer'],
             'image' => ['required','image','mimes:jpeg,png,jpg'],
-            'quantity' => ['required','integer'],
             'type' => ['required','boolean'],
             'desc' => ['required','string','min:5']
         ]);
@@ -35,21 +34,22 @@ class AdminProductController extends Controller
 
         Product::create([
             'name' => $data['name'],
-            'price' => $data['price'],
-            'quantity' => $data['quantity'],
-            'quantityLeft' => $data['quantity'],
+            'price' => $data['price'], 
             'desc' => $data['desc'],
             'type' => $data['type'],
             'image' => 'images/products/'.$imageName
         ]);
         return Redirect::route('admin.viewProduct')->with('message', 'Product Added Succesfully');   
     }
+    public function editProduct($id) {
+        $data = DB::table("products")->where("id","=",$id)->get();
 
+        return view("admin.editProduct")->with("product", $data);
+    }
     public function updateProduct(Request $request) {
         $request->validate([ 
             'name' => ['required', 'string', 'min:3'],
-            'price' => ['required', 'integer'], 
-            'quantity' => ['required','integer'],
+            'price' => ['required', 'integer'],  
             'desc' => ['required','string','min:5']
         ]);
         $data = $request->all();   
@@ -70,7 +70,7 @@ class AdminProductController extends Controller
 
         DB::table('products')
             ->where('id' ,'=', $request['id'])
-            ->update(['name' => $data['name'],'price' => $data['price'], 'quantity' => $data['quantity'], 'desc' => $data['desc'],'type' => $data['type']]);
+            ->update(['name' => $data['name'],'price' => $data['price'], 'desc' => $data['desc'],'type' => $data['type']]);
         
         return Redirect::route('admin.viewProduct')->with('message', 'Product Added Succesfully');   
     }

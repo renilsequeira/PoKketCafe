@@ -26,7 +26,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
-                <a href="#">Admin Dashboard</a>
+                <a href="#">User Dashboard</a>
                 <div id="close-sidebar">
                     <i class="fas fa-times"></i>
                 </div>
@@ -37,9 +37,8 @@
                     alt="User picture">
                 </div>
                 <div class="user-info">
-                    <span class="user-name">Admin 
-                </span>
-                <span class="user-role">Administrator</span>
+                    <span class="user-name"> {{ Auth::user()->name }} 
+                </span> 
                 <span class="user-status">
                     <i class="fa fa-circle"></i>
                     <span>Online</span>
@@ -47,36 +46,37 @@
                 </div>
             </div> 
             <div class="sidebar-menu">
-                <ul>
-                    <li class="header-menu">
-                        <span>General</span>
-                    </li>
+                <ul> 
                     <li class="sidebar-dropdown">
-                        <a href="/admin/dashboard">
+                        <a href="/profile">
                             <i class="fa fa-tachometer-alt"></i>
-                            <span>HOME</span> 
+                            <span>Profile</span> 
+                        </a> 
+                    </li> 
+                    <li class="sidebar-dropdown">
+                        <a href="/edit-profile">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Edit Profile</span> 
+                        </a> 
+                    </li> 
+                    <li class="sidebar-dropdown">
+                        <a href="/add-address">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Add Address</span> 
                         </a> 
                     </li> 
                     <li class="sidebar-dropdown">
                         <a href="/admin/add-product">
                             <i class="fa fa-tachometer-alt"></i>
-                            <span>Add Product</span> 
-                        </a> 
-                    </li> 
-                    <li class="sidebar-dropdown">
-                        <a href="/admin/view-product">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>View Product</span> 
+                            <span>Your Orders</span> 
                         </a> 
                     </li> 
                 </ul>
             </div> 
         </div> 
     </nav> 
-    <main class="page-content">
-        <div class="container-fluid">
-            @yield('content')
-        </div>
+    <main class="page-content"> 
+        @yield('content') 
     </main> 
 </div> 
     

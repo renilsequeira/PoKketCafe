@@ -15,7 +15,9 @@ Route::get('/', 'HomePageController@index')->name('homePage');
 
 Auth::routes();
 
-Route::get('/profile/{active}', 'HomeController@index')->name('profile');
+Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/edit-profile', 'HomeController@getProfile')->name('getprofile');
+Route::get('/add-address', 'HomeController@address')->name('address');
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::get('/add-to-cart/{id}', 'CartController@addToCart')->name('addToCart');
 Route::get('/cart/clear-all', 'CartController@forget')->name('clearAllCart');
@@ -41,6 +43,7 @@ Route::prefix('admin')->group(function() {
     Route::post('/add-product','AdminProductController@addProduct')->name('admin.addProduct');
     Route::post('/update-product','AdminProductController@updateProduct')->name('admin.updateProduct');
     Route::get('/view-product','AdminProductController@viewProduct')->name('admin.viewProduct');
+    Route::get('/edit-product/{id}','AdminProductController@editProduct')->name('admin.editProduct');
     Route::get('/delete-product/{id}','AdminProductController@deleteProduct')->name('admin.deleteProduct');
 
     Route::get('/view-users','AdminController@viewUsers')->name('admin.viewUsers');

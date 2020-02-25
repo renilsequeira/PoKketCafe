@@ -10,12 +10,12 @@
         <a class="card-title" href="/cart/clear-all">Clear Cart</a>
     </div>
     <div class="card-content">
-        <div class="cart">
+        <div class="">
             @foreach($products as $product)
                 @if($product['cart'])
-                    <div class="cart-item flex-h">
-                        <div class="flex-h">
-                            <img src="{{ asset($product['image']) }}" alt="" class="cart-image">
+                    <div class="row">
+                        <div class="flex-h row">
+                            <img src="{{ asset($product['image']) }}" width=50 class="cart-image">
                             <div class="flex-v">
                                 <h5>{{ $product['name']}}</h5>
                                 <p class="list-group-item-text mb-0"> 

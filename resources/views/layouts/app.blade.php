@@ -15,21 +15,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/vendors.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/toggle/switchery.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/ui/dragula.min.css') }}"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/app.css') }}"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-content-menu.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-gradient.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/switch.css') }}"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/toastr.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> 
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"> 
     @yield('css')
 </head>
 <body>
@@ -95,13 +83,8 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script> 
-    <script src="{{ asset('app-assets/vendors/js/ui/headroom.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/jquery.knob.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('app-assets/vendors/js/forms/toggle/switchery.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/dragula.min.js') }}" type="text/javascript"></script> 
-    <script src="{{ asset('app-assets/js/core/app-menu.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('app-assets/js/core/app.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('app-assets/js/scripts/customizer.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/popper.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
 </body>
 </html>

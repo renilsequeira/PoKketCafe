@@ -19,7 +19,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     } 
-    public function index($active)
+    public function profile()
     {    
         $user = User::find(Auth::user()->id);
         $profile = DB::table("profiles")->where('userId',Auth::user()->id)->get();
@@ -40,10 +40,16 @@ class HomeController extends Controller
             ->select('orders.*','users.*','addresses.*')  
             ->where('users.id','=',Auth::user()->id)
             ->get();  
-        return view('auth.profile')->with('profile', $profile)
-                                ->with('active', $active)
+        return view('auth.profile')->with('profile', $profile) 
                                 ->with('address',$address)
                                 ->with('orders',$order);
+    }
+    public function getProfile() {
+        $profile = DB::table("profiles")->where('userId',Auth::user()->id)->get();
+        return view('auth.editProfile')->with('profile', $profile);
+    }
+    public function address() {
+        return view("auth.addAddress");
     }
     public function editProfile(Request $request) {
         $data = $request->all(); 
@@ -84,7 +90,7 @@ class HomeController extends Controller
             'address' => $data['address'],
             'phoneNumber' => $data['phoneNumber']
         ]); 
-        return Redirect::route('profile',2)->with('message', 'Address Added Succesfully');
+        return Redirect::route('profile')->with('message', 'Address Added Succesfully');
     }
     public function deleteAddress($id) {
         $adr = Address::find($id);
