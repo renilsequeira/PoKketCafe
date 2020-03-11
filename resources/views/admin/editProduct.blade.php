@@ -35,7 +35,7 @@
                 </div>
                 <div class="row">
                     
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         @if($product[0]->type)
                             <label style="margin-right: 5px;">Veg</label>
                             <input type="radio" name="type" value="1" class="mr-2" checked>

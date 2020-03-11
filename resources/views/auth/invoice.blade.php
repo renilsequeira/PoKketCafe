@@ -12,7 +12,7 @@
                     <img src="{{ asset('/images/program/logo.png')}}" alt="company logo" class="">
                     <div class="media-body">
                         <ul class="ml-2 px-0 list-unstyled">
-                            <li class="text-bold-800">Excel Bakers</li>
+                            <li class="text-bold-800">Pokket Cafe</li>
                             <li>Near State Bank,</li>
                             <li>Mangaluru,</li>
                             <li>Karnataka 32940,</li>

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomePageController@index')->name('homePage');
+Route::get('/product/{id}', 'HomePageController@getProduct')->name('getProduct');
 
 Auth::routes();
 
@@ -28,8 +29,11 @@ Route::post('/edit-profile','HomeController@editProfile')->name('editProfile');
 Route::post('/add-address','HomeController@addAddress')->name('addAddress');
 Route::get('/del-address/{id}','HomeController@deleteAddress')->name('deleteAddress');
 Route::post('/place-order','HomeController@placeOrder')->name('placeOrder');
-Route::get('/profile/{active}/cancel-order/{id}','HomeController@cancelOrder')->name('cancelOrder');
-Route::get('/profile/{active}/invoice/{id}','HomeController@invoice')->name('invoice');
+Route::get('/orders','HomeController@orders')->name('orders');
+Route::get('/profile/cancel-order/{id}','HomeController@cancelOrder')->name('cancelOrder');
+Route::get('/profile/invoice/{id}','HomeController@invoice')->name('invoice');
+Route::post('/user/review', 'HomeController@review');
+Route::get("/review", 'ReviewController@getReview');
 
 Route::get('/admin', 'ProductController@admin');
 
@@ -48,7 +52,9 @@ Route::prefix('admin')->group(function() {
 
     Route::get('/view-users','AdminController@viewUsers')->name('admin.viewUsers');
     Route::get('/view-orders','AdminController@viewOrders')->name('admin.viewOrders');
-
+    Route::get('/view-reviews','AdminController@viewReviews')->name('admin.viewReviews');
+    Route::get('/delete-review/{id}','AdminController@del')->name('admin.deleteReview');
+    
     Route::get('/approve-order/{id}','AdminController@approveOrder')->name('admin.approveOrder');
     Route::get('/cancel-order/{id}','AdminController@cancelOrder')->name('admin.cancelOrder');
 });

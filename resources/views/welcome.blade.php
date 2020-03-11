@@ -3,12 +3,14 @@
 @section('content')
     <div class="pt-1 row container-fluid m-auto">
     @foreach($products as $key=>$product)
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top img-fluid" style="height: 140px; width: auto;"src="{{ asset($product['image']) }}" alt="{{ $product['name']}}">
+        <div class="card col-md-3">
+            <div>
+                <img class="card-img-top img-fluid" style="height: 140px; width: auto;" src="{{ asset($product['image']) }}" alt="{{ $product['name']}}">
+            </div>
             <div class="card-body">
                 <div class="d-flex" style="justify-content: space-between;">
-                    <h5 class="card-title">{{ $product['name']}}</h5>
-                    <span class="float-left">$ {{ $product['price'] }}</span>
+                    <a class="card-title h5" href="/product/{{ $product->id }}">{{ $product['name']}}</a>
+                    <span class="float-left">₹ {{ $product['price'] }}</span>
                 </div>
                 <p class="card-text">{{ $product['desc']}}</p>
                 @if(!$product['cart'])

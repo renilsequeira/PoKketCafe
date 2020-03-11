@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <div class="card m-1 p-1">
+    <div class=" m-1 p-1">
     @if(count($orders) == 0)
         <p><i class="ft-alert-triangle"></i> No New Orders</p>
     @else

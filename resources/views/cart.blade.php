@@ -9,12 +9,11 @@
         <h4 class="card-title">Cart Items</h4>
         <a class="card-title" href="/cart/clear-all">Clear Cart</a>
     </div>
-    <div class="card-content">
-        <div class="">
+    <div class="card-content"> 
             @foreach($products as $product)
                 @if($product['cart'])
-                    <div class="row">
-                        <div class="flex-h row">
+                    <div class="row d-flex w-100 mx-2 cart">
+                        <div class="d-flex flex-h row">
                             <img src="{{ asset($product['image']) }}" width=50 class="cart-image">
                             <div class="flex-v">
                                 <h5>{{ $product['name']}}</h5>
@@ -29,11 +28,11 @@
                         </div>
                         <div class="flex-h cart-right">
                             <div class="flex-h mx-2 qty">
-                                <a class="ft-plus br p" href="/cart/increment/{{$product['id']}}"></a>
+                                <a class="ft-plus br p" href="/cart/increment/{{$product['id']}}">+</a>
                                 <span style="padding: 0px 6px;">{{ $product['cartQuantity']}}</span>
-                                <a class="ft-minus bl p" href="/cart/decrement/{{$product['id']}}"></a>
+                                <a class="ft-minus bl p" href="/cart/decrement/{{$product['id']}}">-</a>
                             </div>
-                            <h5 class="m-0 mr-1">$ {{ $product['cartQuantity'] * $product['price']}}</h5>
+                            <h5 class="m-0 mr-1">₹ {{ $product['cartQuantity'] * $product['price']}}</h5>
                             <a class="hover flex-h" href="/cart/remove/{{ $product['id'] }}"><i class="ft-x" style="font-size: 18px;"></i> </a>
                         </div>
                     </div> 
@@ -42,7 +41,7 @@
             @endforeach
             <div class="flex-h w-100 p-2" style="justify-content: space-between;">
                 <h3>Total</h3>
-                <h3>$ {{ $total }}</h3>
+                <h3>₹ {{ $total }}</h3>
             </div>
             <button type="button" class="btn btn-outline-success mb-1" data-toggle="modal" data-target="#xlarge">
                 Proceed to Payment
@@ -74,7 +73,7 @@
                                         <span class="border-span"></span>
                                     @endforeach
                                 </div>
-                                <a href="/profile/2">Add a Address</a>
+                                <a href="/add-address">Add a Address</a>
                                 <div class="mt-1">
                                     @foreach($products as $prd) 
                                         @if($prd['cart'])

@@ -23,6 +23,39 @@
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
     </a>
+    <ul class="navbar-nav flex-row d-flex align-items-center shadow p-2" style="justify-content: flex-end;">
+        @guest
+            <li class="nav-item mr-1">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+        @else
+            <li class="mr-2">
+                <a class="ml-2" href="/cart"><i class="ft-shopping-cart"></i>Cart</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+        @endguest
+    </ul>
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
@@ -46,7 +79,13 @@
                 </div>
             </div> 
             <div class="sidebar-menu">
-                <ul> 
+                <ul>
+                    <li class="sidebar-dropdown">
+                        <a href="/">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Home</span> 
+                        </a> 
+                    </li>  
                     <li class="sidebar-dropdown">
                         <a href="/profile">
                             <i class="fa fa-tachometer-alt"></i>
@@ -66,9 +105,15 @@
                         </a> 
                     </li> 
                     <li class="sidebar-dropdown">
-                        <a href="/admin/add-product">
+                        <a href="/orders">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Your Orders</span> 
+                        </a> 
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="/review">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Add Review</span> 
                         </a> 
                     </li> 
                 </ul>

@@ -33,7 +33,7 @@
             </div>
             <div class="sidebar-header">
                 <div class="user-pic">
-                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                <img class="img-responsive img-rounded" src=""
                     alt="User picture">
                 </div>
                 <div class="user-info">
@@ -67,6 +67,18 @@
                         <a href="/admin/view-product">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>View Product</span> 
+                        </a> 
+                    </li> 
+                    <li class="sidebar-dropdown">
+                        <a href="/admin/view-orders">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>View Orders</span> 
+                        </a> 
+                    </li> 
+                    <li class="sidebar-dropdown">
+                        <a href="/admin/view-reviews">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>View Reviews</span> 
                         </a> 
                     </li> 
                 </ul>

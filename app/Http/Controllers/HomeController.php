@@ -12,6 +12,7 @@ use App\Profile;
 use App\OrderProduct;
 use App\Address;
 use Redirect;
+use App\Review;
 
 class HomeController extends Controller
 { 
@@ -43,6 +44,16 @@ class HomeController extends Controller
         return view('auth.profile')->with('profile', $profile) 
                                 ->with('address',$address)
                                 ->with('orders',$order);
+    }
+    public function orders() {
+        $order = DB::table('orders')
+            ->join('users', 'orders.userId', '=', 'users.id') 
+            ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
+            ->select('orders.*','users.*','addresses.*')  
+            ->where('users.id','=',Auth::user()->id)
+            ->get();
+
+        return view("auth.orders")->with("orders", $order);
     }
     public function getProfile() {
         $profile = DB::table("profiles")->where('userId',Auth::user()->id)->get();
@@ -130,16 +141,26 @@ class HomeController extends Controller
                 ]);
             }
         }
-        return Redirect::route('profile',3)->with('message', 'Order Placed Succesfully'); 
+        return Redirect::route('profile')->with('message', 'Order Placed Succesfully'); 
     }
-    public function cancelOrder($active, $id) {
+    public function cancelOrder($id) {
         DB::table("orders")
             ->where("orders.id","=", $id)
             ->update(["status"=> 'cancelled']);
         
-        return Redirect::route('profile',3)->with('message', 'Order Cancellled Succesfully'); 
+        return Redirect::route('profile')->with('message', 'Order Cancellled Succesfully'); 
     }
-    public function invoice($active, $id) {
+    public function review(Request $request) {
+        $data = $request->all();
+        Review::create([
+            'prdId' => $data['prdId'],
+            'userId' => Auth::user()->id,
+            'desc' => $data['desc'],
+            'rate' => $data['rate']
+        ]);
+        return Redirect::route('profile')->with('message', 'Reviewd Succesfully'); 
+    }
+    public function invoice($id) {
         $order = DB::table('orders')
             ->join('users', 'orders.userId', '=', 'users.id') 
             ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
