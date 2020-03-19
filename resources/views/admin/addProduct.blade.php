@@ -17,14 +17,14 @@
 @section('content') 
     <div class="card m-2">
         <div class="card-header d-flex" style="justify-content: space-between;">
-            <h2>Add Product</h2>
+            <h4>Add Product</h4>
             <a href="/admin/view-product" class="btn btn-primary">View Product</a>
         </div>
         <div class="card-body">
             <form action="{{ route('admin.addProduct') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row text-dark">
+                    <div class="form-group col-md-12">
                         <label>Product Name</label> 
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -34,7 +34,7 @@
                             </span>
                         @enderror 
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label>Product Price</label> 
                         <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
 
@@ -43,10 +43,8 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
+                    </div> 
+                    <div class="form-group col-md-12">
                         <label>Product Image</label> 
                         <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" required autocomplete="image" autofocus>
 
@@ -56,13 +54,17 @@
                             </span>
                         @enderror 
                     </div>  
-                    <div class="col-md-4 d-flex" style="align-items: center;">
-                        <label class="mr-1">Veg</label>
-                        <input type="radio" name="type" value="1" class="mr-3">
-                        <label class="mr-1">Non Veg</label>
-                        <input type="radio" name="type" value="0" class="">
+                    <div class="col-md-12 d-flex" style="align-items: center;">
+                        <div>
+                            <input name="type" type="radio" class="filled-in chk-col-primary" value="1" id="md_checkbox_25">
+                            <label for="md_checkbox_25">Veg</label>
+                        </div>
+                        <div>
+                            <input name="type" type="radio" class="filled-in chk-col-primary" value="0" id="md_checkbox_256">
+                            <label for="md_checkbox_256">Non Veg</label>
+                        </div> 
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <label for="">Enter the Description</label>
                         <textarea name="desc" class="form-control @error('desc') is-invalid @enderror" name="desc" id="" cols="10" rows="5"
                             value="{{ old('desc') }}" required autocomplete="desc" autofocus

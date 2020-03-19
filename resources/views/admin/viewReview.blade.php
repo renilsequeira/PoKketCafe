@@ -1,13 +1,20 @@
 @extends('layouts.admin')
+@section('css') 
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables/css/jquery.dataTables.min.css') }}">
+@endsection
 
+@section('js')
+    <script src="{{ asset('assets/plugins/datatables/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}" type="text/javascript"></script>
+@endsection
 @section('content')
 <div class="card"> 
     <div class="card-header">
         <h4>View Review</h4>
     </div>
     <div class="card-body">
-        <div class="col-sm-12">
-            <table class="table table-striped table-bordered zero-configuration dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+        <div class="table-responsive">
+            <table id="example" class="display text-dark" style="min-width: 845px">
                 <thead>
                     <tr> 
                         <th>Name</th>

@@ -9,7 +9,8 @@
         <h4 class="card-title">Cart Items</h4>
         <a class="card-title" href="/cart/clear-all">Clear Cart</a>
     </div>
-    <div class="card-content"> 
+    <hr>
+    <div class="card-body"> 
             @foreach($products as $product)
                 @if($product['cart'])
                     <div class="row d-flex w-100 mx-2 cart">
@@ -26,14 +27,14 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="flex-h cart-right">
-                            <div class="flex-h mx-2 qty">
+                        <div class="flex-h cart-right row">
+                            <div class="flex-h mx-5 qty">
                                 <a class="ft-plus br p" href="/cart/increment/{{$product['id']}}">+</a>
                                 <span style="padding: 0px 6px;">{{ $product['cartQuantity']}}</span>
                                 <a class="ft-minus bl p" href="/cart/decrement/{{$product['id']}}">-</a>
                             </div>
-                            <h5 class="m-0 mr-1">₹ {{ $product['cartQuantity'] * $product['price']}}</h5>
-                            <a class="hover flex-h" href="/cart/remove/{{ $product['id'] }}"><i class="ft-x" style="font-size: 18px;"></i> </a>
+                            <h5 class="m-0 mr-3">₹ {{ $product['cartQuantity'] * $product['price']}}</h5>
+                            <a class="hover flex-h" href="/cart/remove/{{ $product['id'] }}"><span style="font-size: 18px;">X</span> </a>
                         </div>
                     </div> 
                     <span class="border-span"></span>
@@ -59,16 +60,18 @@
                     <div class="modal-body">
                         <form method="POST" class="flex-v" action="{{ route('placeOrder') }}">
                             @csrf
-                            <div class="flex-v">
+                            <div class="flex-v text-dark">
                                 <label for="">Select An Address</label>
                                 <div class="flex-v">
                                     @foreach($address as $adr) 
-                                        <div class="flex-h align-items-center">
-                                            <input type="radio" name="adr" value="{{ $adr->id }}" class="mr-1" checked>
-                                            <div class="flex-v">
-                                                <p class="p-0 m-0">{{ $adr->address }}</p>
-                                                <p>{{ $adr->phoneNumber }}</p>
-                                            </div>
+                                        <div class="flex-h align-items-center"> 
+                                            <div>
+                                                <input name="adr" type="radio" class="filled-in chk-col-primary" value="{{ $adr->id}}" id="md_checkbox_25" checked>
+                                                <label for="md_checkbox_25">
+                                                    <p class="p-0 m-0">{{ $adr->address }}</p>
+                                                    <p>{{ $adr->phoneNumber }}</p>
+                                                </label>
+                                            </div> 
                                         </div>  
                                         <span class="border-span"></span>
                                     @endforeach

@@ -141,6 +141,7 @@ class HomeController extends Controller
                 ]);
             }
         }
+        $request->session()->forget('cart');
         return Redirect::route('profile')->with('message', 'Order Placed Succesfully'); 
     }
     public function cancelOrder($id) {

@@ -2,132 +2,130 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Excel Bakers') }}</title>
-
-    <!-- Scripts -->
-   
-    <!-- Fonts -->
+    <title>PoKKet Cafe</title> 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    @yield('css')
+    @yield('css') 
 </head>
 <body>
-<div class="page-wrapper chiller-theme toggled">
-    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-        <i class="fas fa-bars"></i>
-    </a>
-    <ul class="navbar-nav flex-row d-flex align-items-center shadow p-2" style="justify-content: flex-end;">
-        @guest
-            <li class="nav-item mr-1">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-            </li>
-            @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-            @endif
-        @else
-            <li class="mr-2">
-                <a class="ml-2" href="/cart"><i class="ft-shopping-cart"></i>Cart</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }} <span class="caret"></span>
-                </a>
 
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
-            </li>
-        @endguest
-    </ul>
-    <nav id="sidebar" class="sidebar-wrapper">
-        <div class="sidebar-content">
-            <div class="sidebar-brand">
-                <a href="#">User Dashboard</a>
-                <div id="close-sidebar">
-                    <i class="fas fa-times"></i>
+<div id="main-wrapper" class="show"> 
+    <div class="header m-0 w-100" >    
+        <div class="header-content d-flex justify-content-between w-100 align-items-center">  
+            <div class="p-0 m-0 nav-control d-flex align-items-center text-danger">
+                <div class="hamburger">
+                    <span class="line"></span>  
+                    <span class="line"></span>  
+                    <span class="line"></span>
                 </div>
             </div>
-            <div class="sidebar-header">
-                <div class="user-pic">
-                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-                    alt="User picture">
-                </div>
-                <div class="user-info">
-                    <span class="user-name"> {{ Auth::user()->name }} 
-                </span> 
-                <span class="user-status">
-                    <i class="fa fa-circle"></i>
-                    <span>Online</span>
-                </span>
-                </div>
+            <div class="brand-logo">
+                <h3><a href="/"> PoKKet Cafe</a></h3>
             </div> 
-            <div class="sidebar-menu">
+            <div class="header-right">
                 <ul>
-                    <li class="sidebar-dropdown">
-                        <a href="/">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Home</span> 
+                    @guest
+                        <li class="icons">
+                            <a href="/login">
+                                Login
+                                <i class="mdi mdi-login"></i> 
+                            </a> 
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="icons">
+                                <a href="/login">
+                                    Register
+                                    <i class="mdi mdi-login"></i> 
+                                </a> 
+                            </li>
+                        @endif
+                    @else
+                    <li class="icons">
+                        <a href="/cart">
+                            Cart
+                            <i class="mdi mdi-cart"></i>
+                            <div class="pulse-css"></div>
                         </a> 
-                    </li>  
-                    <li class="sidebar-dropdown">
+                    </li> 
+                    <li class="icons">
                         <a href="/profile">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Profile</span> 
+                            Profile
+                            <i class="mdi mdi-face-profile"></i>
+                            <div class="pulse-css"></div>
                         </a> 
                     </li> 
-                    <li class="sidebar-dropdown">
-                        <a href="/edit-profile">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Edit Profile</span> 
+                    <li class="icons">
+                        <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"
+                        >
+                            Logout
+                            <i class="mdi mdi-power"></i> 
                         </a> 
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li> 
-                    <li class="sidebar-dropdown">
-                        <a href="/add-address">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Add Address</span> 
-                        </a> 
-                    </li> 
-                    <li class="sidebar-dropdown">
-                        <a href="/orders">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Your Orders</span> 
-                        </a> 
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="/review">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Add Review</span> 
-                        </a> 
-                    </li> 
+                    @endif
                 </ul>
             </div> 
+        </div>
+    </div>  
+
+    <div class="nk-sidebar">           
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div class="nk-nav-scroll active" style="overflow: hidden; width: auto; height: 100%;">
+            <ul class="metismenu in" id="menu"> 
+                <li class="mega-menu mega-menu-lg">
+                    <a class="has-arrow" href="/" aria-expanded="false">
+                        <i class="mdi mdi-home"></i><span class="nav-text">Home</span>
+                    </a> 
+                </li>
+                <li class="mega-menu mega-menu-lg">
+                    <a class="has-arrow" href="/profile" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i><span class="nav-text">Profile</span>
+                    </a> 
+                </li>
+                <li class="mega-menu mega-menu-lg">
+                    <a class="has-arrow" href="/edit-profile" aria-expanded="false">
+                        <i class="mdi mdi-pencil"></i><span class="nav-text">Edit Profile</span>
+                    </a> 
+                </li>
+                <li class="mega-menu mega-menu-lg">
+                    <a class="has-arrow" href="/add-address" aria-expanded="false">
+                        <i class="mdi mdi-plus"></i><span class="nav-text">Add Address</span>
+                    </a> 
+                </li>
+                <li class="mega-menu mega-menu-lg">
+                    <a class="has-arrow" href="/orders" aria-expanded="false">
+                        <i class="mdi mdi-shopping"></i><span class="nav-text">Your Orders</span>
+                    </a> 
+                </li>
+                <li class="mega-menu mega-menu-lg">
+                    <a class="has-arrow" href="/review" aria-expanded="false">
+                        <i class="mdi mdi-keyboard-variant"></i><span class="nav-text">Review Product</span>
+                    </a> 
+                </li>
+            </ul>
+        </div><div class="slimScrollBar" style="background: rgb(198, 200, 201); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 54.6253px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+    </div> 
+    <div class="content-body" style="min-height: 633px;">
+        <div class="container-fluid">
+            @yield("content")
         </div> 
-    </nav> 
-    <main class="page-content"> 
-        @yield('content') 
-    </main> 
-</div> 
+    </div>    
+</div>
     
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/popper.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/plugins/common/common.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.min') }}.js"></script>
+    <script src="{{ asset('assets/js/settings.js') }}"></script>
+    <script src="{{ asset('assets/js/gleek.js') }}"></script>
+    <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
     @yield('js')
 </body>
 </html>

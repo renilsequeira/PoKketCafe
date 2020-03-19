@@ -1,165 +1,112 @@
-@extends('layouts.admin')
+@extends('layouts.admin') 
 
 @section('content')
-@extends('layouts.admin')
-@section("css")
-
-<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/cryptocoins/cryptocoins.css') }}">
-@endsection
-@section("js")
-pt>
-  <script src="{{ asset('app-assets/vendors/js/charts/raphael-min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('app-assets/vendors/js/charts/morris.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('app-assets/vendors/js/charts/jquery.sparkline.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('app-assets/js/scripts/cards/card-statistics.js') }}" type="text/javascript"></script>
-@endsection
-
-@section('content')
-<div class="content-wrapper">
-      <div class="content-header row">
+<div class="row gap-y">
+<div class="row w-100" id="dragdrop">
+  <div class="col-md-3 col-sm-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="stat-widget-two">
+                  <div class="media">
+                      <div class="media-body">
+                          <h2 class="mt-0 mb-1 text-info">{{ $count_users }}</h2><span class="">Total Users</span>
+                      </div>
+                      <img class="ml-3" src="{{ asset('assets/images/icons/1.png') }}" alt="">
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="content-body"> 
-        <div class="row">
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="info">{{ $count_users }}</h3>
-                      <h6>Users</h6>
-                    </div>
-                    <div>
-                      <i class="icon-user info font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="stat-widget-two">
+                  <div class="media">
+                      <div class="media-body">
+                          <h2 class="mt-0 mb-1 text-danger">{{ $count_products }}</h2><span class="">Total Products</span>
+                      </div>
+                      <img class="ml-3" src="{{ asset('assets/images/icons/6.png') }}" alt="">
+                  </div>
               </div>
-            </div>
           </div>
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="warning">{{ $count_products }}</h3>
-                      <h6>Products</h6>
-                    </div>
-                    <div>
-                      <i class="ft-codepen warning font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
+      </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="stat-widget-two">
+                  <div class="media">
+                      <div class="media-body">
+                          <h2 class="mt-0 mb-1 text-warning">{{ $amount }}</h2><span class="">Total Amount</span>
+                      </div>
+                      <img class="ml-3" src="{{ asset('assets/images/icons/3.png') }}" alt="">
+                  </div>
               </div>
-            </div>
           </div>
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="success">{{ $count_reviews }}</h3>
-                      <h6>Customer Reviews</h6>
-                    </div>
-                    <div>
-                      <i class="icon-heart success font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
+      </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="stat-widget-two">
+                  <div class="media">
+                      <div class="media-body">
+                          <h2 class="mt-0 mb-1 text-success">{{ $count_orders }}</h2><span class="">Total Orders</span>
+                      </div>
+                      <img class="ml-3" src="{{ asset('assets/images/icons/5.png') }}" alt="">
+                  </div>
               </div>
-            </div>
           </div>
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="danger">{{ $count_order_products }}</h3>
-                      <h6>Products Ordered</h6>
-                    </div>
-                    <div>
-                      <i class="ft-align-justify success font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="danger">{{ $count_orders }}</h3>
-                      <h6>Orders</h6>
-                    </div>
-                    <div>
-                      <i class="ft-shopping-cart danger font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
-              </div>
-            </div>
-          </div>
+      </div>
+  </div>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-12">
+  <div class="card transparent-card">
+      <div class="card-header pb-0">
+          <h4 class="card-title mt-2"> Recent Orders List</h4>
+      </div>
+      <div class="card-body p-0">
+          <div class="table-responsive">
+              <table class="table table-padded recent-order-list-table table-responsive-fix-big">
+                  <thead>
+                      <tr>
+                          <th>#No</th>
+                          <th>Customer Name</th>
+                          <th>Delivery Date &amp; Time</th>
+                          <th>Location</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @foreach($order as $key=>$o)
+                      <tr>
+                          <td>{{ $key + 1}}</td>
+                          <td>
+                            <a href="javascript:void()" class="mr-2 bg-primary rounded-circle text-center text-uppercase d-inline-block">{{ substr($o->name,0,2) }}</a> 
+                            <span class="text-pale-sky">{{ $o->name }}</span>
+                          </td>
+                          <td class="text-muted">{{ $o->created_at }}</td>
+                          <td><a href="javascript:void()" class="text-primary">{{ substr($o->address,0,30) }}</a></td>
+                          <td><span class="text-pale-sky">₹ {{ $o->total }}</span></td>
+                          @if($o->status == "approved")
+                            <td><span class="label label-xl label-rounded label-success">{{ $o->status }}</span>
+                          @elseif($o->status == "cancelled")
+                            <td><span class="label label-xl label-rounded label-danger">{{ $o->status }}</span>
+                          @else
+                            <td><span class="label label-xl label-rounded label-warning">{{ $o->status }}</span>
+                          @endif
+                          </td>
+                      </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+          </div> 
+      </div>
+  </div>
+</div>
 
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="danger">{{ $count_pending }}</h3>
-                      <h6>Orderes Pending</h6>
-                    </div>
-                    <div>
-                      <i class="ft-more-horizontal warning font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="danger">{{ $count_approved }}</h3>
-                      <h6>Orderes Approved</h6>
-                    </div>
-                    <div>
-                      <i class="ft-shopping-cart info font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="media d-flex">
-                    <div class="media-body text-left">
-                      <h3 class="danger">{{ $count_rejected }}</h3>
-                      <h6>Orders Rejected</h6>
-                    </div>
-                    <div>
-                      <i class="ft-slash primary font-large-2 float-right"></i>
-                    </div>
-                  </div> 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>  
-@endsection
-@endsection
+</div>
+@endsection 

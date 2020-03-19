@@ -25,8 +25,18 @@ class AdminController extends Controller
         $count_order_products = DB::table("order_products")->count();
         $count_orders = DB::table("orders")->count();
         $count_pending = DB::table("orders")->where('status',"pending")->count();
-        $count_approved = DB::table("orders")->where('status',"approved")->count();
+        $count_approved = DB::table("orders")->where('status',"approved")->get();
         $count_rejected = DB::table("orders")->where('status',"rejected")->count();
+        $amount = 0;
+        foreach($count_approved as $c) {
+            $amount = $amount + $c->total;
+        }
+        $order = DB::table('orders')
+            ->join('users', 'orders.userId', '=', 'users.id') 
+            ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
+            ->select('orders.id','orders.total','orders.status','orders.created_at','addresses.address','addresses.phoneNumber','users.name')   
+            ->orderBy('created_at','desc')
+            ->get();
 
         return view('admin.dashboard')
                 ->with("count_users", $count_users)
@@ -35,8 +45,9 @@ class AdminController extends Controller
                 ->with("count_order_products", $count_order_products)
                 ->with("count_orders", $count_orders)
                 ->with("count_pending", $count_pending)
-                ->with("count_approved", $count_approved)
-                ->with("count_rejected", $count_rejected);
+                ->with("amount", $amount)
+                ->with("count_rejected", $count_rejected)
+                ->with("order", $order);
     }
     public function viewReviews() {
         $data = DB::table('reviews')
@@ -66,9 +77,9 @@ class AdminController extends Controller
             ->join('users', 'orders.userId', '=', 'users.id') 
             ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
             ->select('orders.id','orders.total','orders.status','orders.created_at','addresses.address','addresses.phoneNumber')   
-            ->where('orders.status','=','pending')  
-            ->get();  
-        // dd($order);
+            ->orderBy('created_at','desc')
+            ->get();
+
         $orderProducts = DB::table("order_products")
             ->join('products','order_products.productId','=','products.id')
             ->select('order_products.*','products.price','products.name','products.image')                 

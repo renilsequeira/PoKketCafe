@@ -4,12 +4,12 @@
 @endsection
 
 @section('content')
-    <div class=" m-1 p-1">
+    <div class="m-1 p-1">
     @if(count($orders) == 0)
         <p><i class="ft-alert-triangle"></i> No New Orders</p>
     @else
         @foreach($orders as $key=>$order)
-        <div class="flex-h w-100" style="align-items: center;justify-content: space-around;">
+        <div class="flex-h w-100" style="align-items: center;justify-content: space-around; font-size: 15px;">
             <div class="flex-v mx-1" style="flex:4">
                 <p>Address : {{ $order->address }}</p> 
                 <p>Tel:  +{{ $order->phoneNumber }}</p>
@@ -38,9 +38,11 @@
                     <div class="badge badge-success mb-1">Approved</div>
                 @else
                     <div class="badge badge-danger mb-1">{{ $order->status }}</div>
-                @endif   
+                @endif  
+                @if($order->status == 'pending') 
                 <a href="/admin/approve-order/{{$order->id}}">Approved Order</a>
                 <a href="/admin/cancel-order/{{$order->id}}">Cancel Order</a> 
+                @endif
             </div>
         </div>
 

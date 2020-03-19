@@ -2,89 +2,82 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
+    <title>PoKKet Cafe</title> 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"rel="stylesheet">
-    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"> 
-    @yield('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    @yield('css') 
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="height: 60px;">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto d-flex align-items-center">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item mr-1">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+<div id="main-wrapper" class="show"> 
+    <div class="header m-0 w-100" >    
+        <div class="header-content d-flex justify-content-between w-100 align-items-center">
+            <div class="nav-brand">
+                <h3><a href="/"> PoKKet Cafe</a></h3>
+            </div> 
+            <div class="header-right">
+                <ul>
+                    @guest
+                        <li class="icons">
+                            <a href="/login">
+                                Login
+                                <i class="mdi mdi-login"></i> 
+                            </a> 
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="icons">
+                                <a href="/login">
+                                    Register
+                                    <i class="mdi mdi-login"></i> 
+                                </a> 
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        @endif
+                    @else
+                    <li class="icons">
+                        <a href="/cart">
+                            Cart
+                            <i class="mdi mdi-cart"></i>
+                            <div class="pulse-css"></div>
+                        </a> 
+                    </li> 
+                    <li class="icons">
+                        <a href="/profile">
+                            Profile
+                            <i class="mdi mdi-face-profile"></i>
+                            <div class="pulse-css"></div>
+                        </a> 
+                    </li> 
+                    <li class="icons">
+                        <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"
+                        >
+                            Logout
+                            <i class="mdi mdi-power"></i> 
+                        </a> 
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/profile">
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="ml-2" href="/cart"><i class="ft-shopping-cart"></i></a>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main>
-            @yield('content')
-        </main>
-    </div>
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/popper.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li> 
+                    @endif
+                </ul>
+            </div> 
+        </div>
+    </div>      
+</div>
+@yield("content")
+    
+    <script src="{{ asset('assets/plugins/common/common.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.min') }}.js"></script>
+    <script src="{{ asset('assets/js/settings.js') }}"></script>
+    <script src="{{ asset('assets/js/gleek.js') }}"></script>
+    <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
+    @yield('js')
 </body>
 </html>
