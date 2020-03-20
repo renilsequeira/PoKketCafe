@@ -9,14 +9,13 @@
         <div id="invoice-company-details" class="row">
             <div class="col-md-6 col-sm-12 text-center text-md-left">
                 <div class="media">
-                    <img src="{{ asset('/images/program/logo.png')}}" alt="company logo" class="">
+                    <img src="{{ asset('/images/program/logo.jpg')}}" alt="company logo" class="img-fluid" width=120>
                     <div class="media-body">
                         <ul class="ml-2 px-0 list-unstyled">
                             <li class="text-bold-800">Pokket Cafe</li>
-                            <li>Near State Bank,</li>
+                            <li>Hampankatta,</li>
                             <li>Mangaluru,</li>
-                            <li>Karnataka 32940,</li>
-                            <li>India</li>
+                            <li>Karnataka 575001,</li> 
                         </ul>
                     </div>
                 </div>
@@ -100,7 +99,7 @@
                     <div class="text-center">
                         <p>Authorized person</p>
                         <img src="{{ asset('images/program/sign.png') }}" alt="signature" class="height-100">
-                        <h6>Excel Bakeres</h6>
+                        <h6>PoKKet Cafe</h6>
                         <p class="text-muted">Owner</p>
                     </div>
                 </div>

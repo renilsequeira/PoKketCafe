@@ -26,7 +26,9 @@ Route::get('/cart/increment/{id}', 'CartController@increment')->name('cartIncrem
 Route::get('/cart/decrement/{id}', 'CartController@decrement')->name('cartDncrement');
 Route::get('/cart/remove/{id}', 'CartController@remove')->name('cartRemove');
 Route::post('/edit-profile','HomeController@editProfile')->name('editProfile');
+Route::get('/edit-address/{id}','HomeController@editAddress')->name('editAddress');
 Route::post('/add-address','HomeController@addAddress')->name('addAddress');
+Route::post('/update-address/{id}','HomeController@updateAddress')->name('updateAddress');
 Route::get('/del-address/{id}','HomeController@deleteAddress')->name('deleteAddress');
 Route::post('/place-order','HomeController@placeOrder')->name('placeOrder');
 Route::get('/orders','HomeController@orders')->name('orders');

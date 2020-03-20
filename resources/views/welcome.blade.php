@@ -38,7 +38,7 @@
             <h4 class="card-title mb-4 text-dark"><a href="/product/{{$product['id']}}">{{ $product['name'] }}</a></h4>
             <div class="row">
                 <div class="col-xl-5 pr-0">
-                    <h4 class="mt-0 mb-3 text-warning">₹  100</h4>
+                    <h4 class="mt-0 mb-3 text-warning">₹  {{$product['price'] }}</h4>
                     @if($product['type'])
                         <h6 class="mb-5 text-success">Veg</h6>
                     @else

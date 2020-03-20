@@ -64,15 +64,16 @@
                 <hr>
                 <div class="row card-body d-flex">
                     @foreach($address as $adr) 
-                        <div class="d-flex justify-content-between row">
+                        <div class="d-flex justify-content-between row w-100">
                             <div class="col-md-9">
                                 <span class="text-muted">Address</span>
                                 <h6>{{ $adr->address }}</h6>
                                 <span class="text-muted">Phone Number</span>
                                 <h6>+91 {{ $adr->phoneNumber }}</h6>
                             </div>
-                            <div class="col-md-2">
-                                <a href="/del-address/{{$adr->id}}" class="text-danger text-right">X Remove Address</a>
+                            <div class="col-md-3">
+                                <a href="/edit-address/{{$adr->id}}" class="mb-3 text-primary text-right"><i class="mdi mdi-pencil"></i> Edit Address</a><br>
+                                <a href="/del-address/{{$adr->id}}" class="text-danger text-right"><i class="mdi mdi-close"></i> Remove Address</a>
                             </div>
                         </div>
                     @endforeach

@@ -31,7 +31,7 @@
                         </li>
                         @if (Route::has('register'))
                             <li class="icons">
-                                <a href="/login">
+                                <a href="/register">
                                     Register
                                     <i class="mdi mdi-login"></i> 
                                 </a> 

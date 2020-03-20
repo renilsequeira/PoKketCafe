@@ -103,6 +103,25 @@ class HomeController extends Controller
         ]); 
         return Redirect::route('profile')->with('message', 'Address Added Succesfully');
     }
+    public function updateAddress(Request $request, $id) {
+        $request->validate([ 
+            'address' => ['required', 'string', 'min:5'],  
+            'phoneNumber' => ['required','integer']
+        ]);  
+        $data = $request->all();
+        DB::table("addresses")
+        ->where("id",$id)
+        ->update([ 
+            'address' => $data['address'],
+            'phoneNumber' => $data['phoneNumber']
+        ]);
+
+        return Redirect::route('profile')->with('message', 'Address Updated Succesfully');
+    }
+    public function editAddress($id) {
+        $data = Address::find($id);
+        return view("auth.editAddress")->with("data", $data);
+    }
     public function deleteAddress($id) {
         $adr = Address::find($id);
         $adr->delete();
@@ -172,7 +191,7 @@ class HomeController extends Controller
             ->join('products','order_products.productId','=','products.id')
             ->select('order_products.*','products.price','products.name','products.image','products.desc')   
             ->where('order_products.orderId','=',$id)              
-            ->get();
+            ->get(); 
  
         return view('auth.invoice')->with('orders',$order)->with("orderProducts", $orderProducts);
     }
