@@ -39,6 +39,7 @@ class HomeController extends Controller
             ->join('users', 'orders.userId', '=', 'users.id') 
             ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
             ->select('orders.*','users.*','addresses.*')  
+            ->where("orders.orderPlaced", true)
             ->where('users.id','=',Auth::user()->id)
             ->get();  
         return view('auth.profile')->with('profile', $profile) 
@@ -49,10 +50,10 @@ class HomeController extends Controller
         $order = DB::table('orders')
             ->join('users', 'orders.userId', '=', 'users.id') 
             ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
-            ->select('orders.*','users.*','addresses.*')  
+            ->select('orders.*',"orders.id as orderId",'users.*','addresses.*')  
+            ->where("orders.orderPlaced", true)
             ->where('users.id','=',Auth::user()->id)
-            ->get();
-
+            ->get(); 
         return view("auth.orders")->with("orders", $order);
     }
     public function getProfile() {
@@ -166,6 +167,7 @@ class HomeController extends Controller
     public function cancelOrder($id) {
         DB::table("orders")
             ->where("orders.id","=", $id)
+            ->where("orders.orderPlaced", true)
             ->update(["status"=> 'cancelled']);
         
         return Redirect::route('profile')->with('message', 'Order Cancellled Succesfully'); 
@@ -182,16 +184,16 @@ class HomeController extends Controller
     }
     public function invoice($id) {
         $order = DB::table('orders')
-            ->join('users', 'orders.userId', '=', 'users.id') 
-            ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
+            ->join('users', 'orders.userId', 'users.id') 
+            ->join('addresses', 'orders.adrId', 'addresses.id') 
             ->select('orders.id','orders.total','orders.status','orders.created_at','orders.updated_at','addresses.address','addresses.phoneNumber')   
-            ->where('orders.id','=',$id)  
+            ->where('orders.id','=',$id)   
             ->get();   
         $orderProducts = DB::table("order_products")
             ->join('products','order_products.productId','=','products.id')
             ->select('order_products.*','products.price','products.name','products.image','products.desc')   
             ->where('order_products.orderId','=',$id)              
-            ->get(); 
+            ->get();  
  
         return view('auth.invoice')->with('orders',$order)->with("orderProducts", $orderProducts);
     }

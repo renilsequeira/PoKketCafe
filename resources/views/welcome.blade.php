@@ -1,64 +1,147 @@
-@extends('layouts.app')
 
-@section('content')
-<div style="position: relative;">
-    <div class="bootstrap-carousel" style="height: calc(100vh - 60px) !important;">
-        <div data-ride="carousel" class="carousel slide h-100" id="carouselExampleCaptions">
-            <ol class="carousel-indicators">
-                <li class="active" data-slide-to="0" data-target="#carouselExampleCaptions"></li>
-                <li data-slide-to="1" data-target="#carouselExampleCaptions" class=""></li>
-                <li data-slide-to="2" data-target="#carouselExampleCaptions" class=""></li>
-            </ol>
-            <div class="carousel-inner h-100" >
-                <div class="carousel-item active" style="background-color: #333;">
-                    <img class="d-block w-100 h-100" src="{{ asset('images/slider/prg4.jpg') }}" alt=""> 
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <!--=============== basic  ===============-->
+        <meta charset="UTF-8">
+        <title>PoKKet Cafe</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="robots" content="index, follow"/>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <!--=============== css  ===============-->	
+        <link type="text/css" rel="stylesheet" href="{{ asset('home/css/reset.css') }}">
+        <link type="text/css" rel="stylesheet" href="{{ asset('home/css/plugins.css') }}">
+        <link type="text/css" rel="stylesheet" href="{{ asset('home/css/style.css') }}">
+        <link type="text/css" rel="stylesheet" href="{{ asset('home/css/color.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--=============== favicons ===============-->
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <style>
+            a {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="loader"><img src="images/loader.png" alt=""></div> 
+        <div id="main">  
+            <header>
+                <div class="header-inner">
+                    <div class="container"> 
+                        <div class="nav-social">
+                            <ul>
+                                <li><a href="#" target="_blank" ><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#" target="_blank" ><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="#" target="_blank" ><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="#" target="_blank" ><i class="fa fa-tumblr"></i></a></li>
+                            </ul>
+                        </div>
+                        <!--logo-->             
+                        <div class="logo-holder">
+                            <a href="index.html">
+                                <p style="color: white;">PoKKet Cafe</p>
+                            </a>
+                        </div> 
+                        <div class="nav-holder">
+                            <nav>
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="#menu">Menu</a></li>  
+                                    @guest  
+                                        <li><a href="/login">Login</a></li>
+                                        <li><a href="/register">Register</a></li>
+                                    @else
+                                        <li><a href="profile">Profile</a></li>
+                                        <li><a href="/cart">Cart</a></li>
+                                    @endif
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img alt="" class="d-block w-100" src="{{ asset('images/slider/prg2.jpg') }}"> 
+            </header>
+            <!--header end-->
+            <!--=============== wrapper ===============-->	
+            <div id="wrapper">
+                <div class="content">
+                    <section class="parallax-section header-section">
+                        <div class="bg bg-parallax" style="background-image:url( {{asset('home/img/1.jpg')}} )" data-top-bottom="transform: translateY(300px);" data-bottom-top="transform: translateY(-300px);"></div>
+                        <div class="overlay"></div>
+                        <div class="container">
+                            <h2>Pokket Cafe</h2>
+                            <h3>Order online is easy</h3>
+                        </div>
+                    </section>
+                    <section>
+                    	<div class="triangle-decor"></div>
+                        <div class="container" id="menu">
+                            <div class="section-title">
+                                <h4>Cafe Products</h4>
+                            </div> 
+                            <ul class="products">
+                                @foreach($products as $key=>$product) 
+                                    <li class="product-cat-mains">
+                                        <a href="product/{{$product['id']}}">
+                                            <img src="{{ $product->image }}" alt="" class="respimg" style="width: 200px !important;">
+                                        </a>
+                                        <h4 class="product-title"><a href="product/{{$product['id']}}">{{ $product->name }}</a></h4>
+                                        <ul class="product-cats">
+                                            @if($product['type'])
+                                                <li><a href="#">Veg</a></li>
+                                            @else
+                                                <li><a href="#">Non Veg</a></li>
+                                            @endif
+                                        </ul>
+                                        <div class="product-price">
+                                            <span>₹ {{ $product->price }}</span>
+                                            @if(!$product['cart'])
+                                                <a class="text-primary" href="/add-to-cart/{{ $product['id']}}"><i class="mdi mdi-cart-plus"></i> Add To Cart </a>
+                                            @else
+                                                <a class="text-primary" href="/cart"><i class="mdi mdi-cart"></i> View Cart</a>
+                                            @endif
+                                        </div>
+                                    </li> 
+                                @endforeach
+                            </ul> 
+                        </div>
+                    </section>
                 </div>
-                <div class="carousel-item">
-                    <img alt="" class="d-block w-100" src="{{ asset('images/slider/prg5.jpg') }}"> 
-                </div>
-            </div><a data-slide="prev" style="z-index: 10;" href="#carouselExampleCaptions" class="carousel-control-prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span>
-            </a><a data-slide="next" style="z-index: 10;" href="#carouselExampleCaptions" class="carousel-control-next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center align-items-center flex-column" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background-color: #333333a6; width: 100%; height: 100%;">
-        <h1 class="text-white text-center">Pokket Cafe</h1>
-        <p class="text-white text-center" style="font-size: 20px; width: 60%;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa explicabo laborum incidunt consectetur a dolor eligendi et cumque, sint illum!</p>
-    </div>
-</div>  
-
-<h4 class="text-center py-5">Products</h4>
-<div class="pt-5 row container-fluid m-auto d-flex flex-wrap justify-content-between" id="product">
-@foreach($products as $key=>$product) 
-<div class="col-sm-3">
-    <div class="card chartjs-stat-card-1">
-        <div class="card-body">
-            <h4 class="card-title mb-4 text-dark"><a href="/product/{{$product['id']}}">{{ $product['name'] }}</a></h4>
-            <div class="row">
-                <div class="col-xl-5 pr-0">
-                    <h4 class="mt-0 mb-3 text-warning">₹  {{$product['price'] }}</h4>
-                    @if($product['type'])
-                        <h6 class="mb-5 text-success">Veg</h6>
-                    @else
-                        <h6 class="mb-5 text-danger">Non Veg</h6>
-                    @endif
-                    <p class="mt-4">{{ substr($product['desc'],0,30) }}</p>
-                    @if(!$product['cart'])
-                        <a class="text-primary" href="/add-to-cart/{{ $product['id']}}"><i class="mdi mdi-cart-plus"></i> Add To Cart </a>
-                    @else
-                        <a class="text-primary" href="/cart"><i class="mdi mdi-cart"></i> View Cart</a>
-                    @endif
-                </div>
-
-                <div class="col-xl-7 pl-0">
-                    <img src="{{ asset($product['image']) }}" alt="{{ $product['name']}}" width="160">
-                </div>
+                <!--=============== footer ===============-->
+                <footer>
+                    <div class="footer-inner">
+                        <div class="container">
+                            <h3 style="color: white;">PoKKet Cafe</h3>
+                            <div class="bold-separator">
+                                <span></span>
+                            </div>
+                            <!--footer contacts links -->
+                            <ul class="footer-contacts">
+                                <li><a href="#">+7(111)123456789</a></li>
+                                <li><a href="#">27th Brooklyn New York, NY 10065</a></li>
+                                <li><a href="#">yourmail@domain.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--to top / privacy policy-->
+                    <div class="to-top-holder">
+                        <div class="container">
+                            <p> <span> &#169; Pokket Cafe . </span> All rights reserved.</p>
+                            <div class="to-top"><span>Back To Top </span><i class="fa fa-angle-double-up"></i></div>
+                        </div>
+                    </div>
+                </footer>
+                <!--footer end --> 
             </div>
+            <!-- wrapper end -->
         </div>
-    </div>
-</div> 
-@endforeach
-</div>
-@endsection
+        <!-- Main end -->
+        <!--=============== google map ===============-->
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>  
+        <!--=============== scripts  ===============-->
+        <script type="text/javascript" src="{{ asset('home/js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('home/js/plugins.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('home/js/scripts.js') }}"></script>
+    </body>
+</html>

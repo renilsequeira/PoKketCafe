@@ -29,9 +29,9 @@
                             <div class="badge badge-danger mr-1">{{ $order->status }}</div>
                         @endif
                         @if($order->status == 'approved')
-                            <a href="/profile/invoice/{{$order->id}}" class="text-primary mt-2">View Details</a>
+                            <a href="/profile/invoice/{{$order->orderId}}" class="text-primary mt-2">View Details</a>
                         @elseif($order->status == "pending")
-                            <a href="/profile/cancel-order/{{$order->id}}" class="text-danger mt-2"><i class="mdi mdi-power"></i> Cancel Order</a>
+                            <a href="/profile/cancel-order/{{$order->orderId}}" class="text-danger mt-2"><i class="mdi mdi-power"></i> Cancel Order</a>
                         @endif
                     </div>
                 </div>

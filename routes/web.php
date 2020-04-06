@@ -30,7 +30,10 @@ Route::get('/edit-address/{id}','HomeController@editAddress')->name('editAddress
 Route::post('/add-address','HomeController@addAddress')->name('addAddress');
 Route::post('/update-address/{id}','HomeController@updateAddress')->name('updateAddress');
 Route::get('/del-address/{id}','HomeController@deleteAddress')->name('deleteAddress');
-Route::post('/place-order','HomeController@placeOrder')->name('placeOrder');
+    
+Route::post('payment', 'PaymentController@eventOrderGen');
+Route::post('payment/status', 'PaymentController@paymentCallback');
+
 Route::get('/orders','HomeController@orders')->name('orders');
 Route::get('/profile/cancel-order/{id}','HomeController@cancelOrder')->name('cancelOrder');
 Route::get('/profile/invoice/{id}','HomeController@invoice')->name('invoice');

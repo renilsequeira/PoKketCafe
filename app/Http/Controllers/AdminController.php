@@ -23,10 +23,10 @@ class AdminController extends Controller
         $count_products = DB::table("products")->count();
         $count_reviews = DB::table("reviews")->count();
         $count_order_products = DB::table("order_products")->count();
-        $count_orders = DB::table("orders")->count();
-        $count_pending = DB::table("orders")->where('status',"pending")->count();
-        $count_approved = DB::table("orders")->where('status',"approved")->get();
-        $count_rejected = DB::table("orders")->where('status',"rejected")->count();
+        $count_orders = DB::table("orders")->where("orderPlaced", true)->count();
+        $count_pending = DB::table("orders")->where("orderPlaced", true)->where('status',"pending")->count();
+        $count_approved = DB::table("orders")->where("orderPlaced", true)->where('status',"approved")->get();
+        $count_rejected = DB::table("orders")->where("orderPlaced", true)->where('status',"rejected")->count();
         $amount = 0;
         foreach($count_approved as $c) {
             $amount = $amount + $c->total;
@@ -35,6 +35,7 @@ class AdminController extends Controller
             ->join('users', 'orders.userId', '=', 'users.id') 
             ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
             ->select('orders.id','orders.total','orders.status','orders.created_at','addresses.address','addresses.phoneNumber','users.name')   
+            ->where("orders.orderPlaced", true)
             ->orderBy('created_at','desc')
             ->get();
 
@@ -77,6 +78,7 @@ class AdminController extends Controller
             ->join('users', 'orders.userId', '=', 'users.id') 
             ->join('addresses', 'orders.adrId', '=', 'addresses.id') 
             ->select('orders.id','orders.total','orders.status','orders.created_at','addresses.address','addresses.phoneNumber')   
+            ->where("orders.orderPlaced", true)
             ->orderBy('created_at','desc')
             ->get();
 

@@ -5,6 +5,24 @@
 @endsection
 @section('content')
 <div class="card container mt-1">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> Something went wrong<br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> Something went wrong<br>
+            <ul>
+                <li>{{ Session::get('error') }}</li>
+            </ul>
+        </div>
+    @endif
     <div class="card-header d-flex" style="justify-content: space-between;">
         <h4 class="card-title">Cart Items</h4>
         <a class="card-title" href="/cart/clear-all">Clear Cart</a>
@@ -58,7 +76,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" class="flex-v" action="{{ route('placeOrder') }}">
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> Something went wrong<br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        <form method="POST" class="flex-v" action="/payment">
                             @csrf
                             <div class="flex-v text-dark">
                                 <label for="">Select An Address</label>
@@ -66,7 +94,7 @@
                                     @foreach($address as $adr) 
                                         <div class="flex-h align-items-center"> 
                                             <div>
-                                                <input name="adr" type="radio" class="filled-in chk-col-primary" value="{{ $adr->id}}" id="md_checkbox_25" checked>
+                                                <input name="address" type="radio" class="filled-in chk-col-primary" value="{{ $adr->id}}" id="md_checkbox_25" checked>
                                                 <label for="md_checkbox_25">
                                                     <p class="p-0 m-0">{{ $adr->address }}</p>
                                                     <p>{{ $adr->phoneNumber }}</p>
