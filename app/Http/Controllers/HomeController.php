@@ -53,7 +53,7 @@ class HomeController extends Controller
             ->select('orders.*',"orders.id as orderId",'users.*','addresses.*')  
             ->where("orders.orderPlaced", true)
             ->where('users.id','=',Auth::user()->id)
-            ->get(); 
+            ->get();    
         return view("auth.orders")->with("orders", $order);
     }
     public function getProfile() {
