@@ -17,7 +17,7 @@ class CreateProfilesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger("userId");
             $table->string("image");
-            $table->bigInteger("phoneNumber"); 
+            $table->bigInteger("phoneNumber")->nullable(true); 
             $table->timestamps();
 
             $table->foreign('userId')

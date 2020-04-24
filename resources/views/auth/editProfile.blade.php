@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="">Change your Phone Number</label>
-                                <input type="number" value="{{ $profile[0]->phoneNumber }}" name="phoneNumber" class="form-control @error('phoneNumber') is-invalid @enderror" placeholder="Change Your Name">
+                                <input type="number" value="{{ $profile[0]->phoneNumber }}" name="phoneNumber" class="form-control @error('phoneNumber') is-invalid @enderror" placeholder="Change Your PhoneNumber">
                                 @error('phoneNumber')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -33,7 +33,7 @@
                             </div> 
                             <div class="col-md-12">
                                 <label for="">Change your Profile Image</label>
-                                <input type="file" name="image" value="" class="form-control @error('image') is-invalid @enderror" placeholder="Change Your Name">
+                                <input type="file" name="image" value="" class="form-control @error('image') is-invalid @enderror" placeholder="Change Your Profile Image">
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">

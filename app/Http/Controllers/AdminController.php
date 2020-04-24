@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Redirect;
+use App\Review;
 
 class AdminController extends Controller
 {

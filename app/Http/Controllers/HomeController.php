@@ -28,7 +28,6 @@ class HomeController extends Controller
             Profile::create([
                 'userId' => Auth::user()->id,
                 'image' => 'images/sample/avatar.png',
-                'phoneNumber' => 1011101100,
             ]);
 
             $profile = DB::table("profiles")->where('userId',Auth::user()->id)->get();
@@ -66,8 +65,8 @@ class HomeController extends Controller
     public function editProfile(Request $request) {
         $data = $request->all(); 
         $request->validate([ 
-            'name' => ['required', 'string', 'min:3'],  
-            'phoneNumber' => ['required','integer']
+            'name' => ['required', 'alpha', 'min:3'],  
+            'phoneNumber' => ['required','digits:10']
         ]);
         if($request['image'] != null) { 
             $request->validate([ 
@@ -94,7 +93,7 @@ class HomeController extends Controller
     public function addAddress(Request $request) {
         $request->validate([ 
             'address' => ['required', 'string', 'min:5'],  
-            'phoneNumber' => ['required','integer']
+            'phoneNumber' => ['required','digits:10']
         ]);  
         $data = $request->all();
         Address::create([
@@ -107,7 +106,7 @@ class HomeController extends Controller
     public function updateAddress(Request $request, $id) {
         $request->validate([ 
             'address' => ['required', 'string', 'min:5'],  
-            'phoneNumber' => ['required','integer']
+            'phoneNumber' => ['required','digits:10']
         ]);  
         $data = $request->all();
         DB::table("addresses")

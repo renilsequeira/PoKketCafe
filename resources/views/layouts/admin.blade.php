@@ -140,6 +140,11 @@
                         </a> 
                     </li>
                     <li class="mega-menu mega-menu-lg">
+                        <a class="has-arrow" href="/admin/view-users" aria-expanded="false">
+                            <i class="mdi mdi-map"></i><span class="nav-text">View Users</span>
+                        </a> 
+                    </li>
+                    <li class="mega-menu mega-menu-lg">
                         <a class="has-arrow" href="/admin/view-reviews" aria-expanded="false">
                             <i class="mdi mdi-keyboard-variant"></i><span class="nav-text">View Reviews</span>
                         </a> 
@@ -148,7 +153,7 @@
             </div><div class="slimScrollBar" style="background: rgb(198, 200, 201); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 54.6253px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
         </div> 
         <div class="content-body" style="min-height: 633px;">
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top: 20px;">
                 @yield("content")
             </div> 
         </div>    
